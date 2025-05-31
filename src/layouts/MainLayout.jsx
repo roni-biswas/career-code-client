@@ -6,10 +6,12 @@ import Footer from "../pages/Shared/Footer";
 const MainLayout = () => {
   return (
     <>
-      <header className="bg-base-100 shadow-md">
+      <header className="bg-base-200 shadow-md">
         <NavBar />
       </header>
-      <Outlet />
+      <main className="max-w-7xl mx-auto">
+        <Outlet />
+      </main>
       <Footer />
     </>
   );
