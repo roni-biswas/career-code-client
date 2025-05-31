@@ -3,6 +3,7 @@ import signInAnimation from "../../assets/signIn.json";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import SocialLogin from "../Shared/SocialLogin";
 
 const SignIn = () => {
   const { user, signInUser } = useAuth();
@@ -71,6 +72,7 @@ const SignIn = () => {
               </div>
               <button className="btn btn-neutral mt-4">Sign In</button>
             </form>
+            <SocialLogin />
           </div>
         </div>
       </div>

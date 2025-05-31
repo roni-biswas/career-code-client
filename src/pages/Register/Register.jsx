@@ -3,6 +3,7 @@ import registerAnimation from "../../assets/register.json";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import SocialLogin from "../Shared/SocialLogin";
 
 const Register = () => {
   const { user, createUser } = useAuth();
@@ -69,6 +70,7 @@ const Register = () => {
                 Register
               </button>
             </form>
+            <SocialLogin />
           </div>
         </div>
       </div>
