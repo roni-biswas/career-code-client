@@ -1,30 +1,31 @@
 import Lottie from "lottie-react";
-import registerAnimation from "../../assets/register.json";
+import signInAnimation from "../../assets/signIn.json";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 
-const Register = () => {
-  const { user, createUser } = useAuth();
+const SignIn = () => {
+  const { user, signInUser } = useAuth();
   const navigate = useNavigate();
 
-  // if user already has been active then return home page
-  if (user) navigate("/");
+  if (user) {
+    return navigate("/");
+  }
 
-  const handleCreateUserSubmit = (e) => {
+  const handleSignIn = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
 
-    // create user
-    createUser(email, password)
+    // sign in user
+    signInUser(email, password)
       .then((result) => {
         if (result.user) {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "User Successfully Registered!",
+            title: "Successfully Sign-In User!",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -39,18 +40,18 @@ const Register = () => {
 
   return (
     <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content gap-24 flex-col lg:flex-row-reverse">
+      <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
           <Lottie
-            animationData={registerAnimation}
+            animationData={signInAnimation}
             loop={true}
-            style={{ width: 300 }}
+            style={{ width: "300px" }}
           />
         </div>
-        <div className="card bg-base-100 w-full lg:max-w-sm shrink-0 shadow-2xl">
+        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
-            <h1 className="text-2xl text-center font-bold">Register now!</h1>
-            <form onSubmit={handleCreateUserSubmit} className="fieldset">
+            <h1 className="text-2xl text-center font-bold">Sing-In now!</h1>
+            <form onSubmit={handleSignIn} className="fieldset">
               <label className="label">Email</label>
               <input
                 type="email"
@@ -65,9 +66,10 @@ const Register = () => {
                 className="input"
                 placeholder="Password"
               />
-              <button type="submit" className="btn btn-neutral mt-4">
-                Register
-              </button>
+              <div>
+                <a className="link link-hover">Forgot password?</a>
+              </div>
+              <button className="btn btn-neutral mt-4">Sign In</button>
             </form>
           </div>
         </div>
@@ -76,4 +78,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SignIn;

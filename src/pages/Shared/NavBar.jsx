@@ -1,7 +1,12 @@
 import React from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
+  const { user, signOutUser } = useAuth();
+  const navigate = useNavigate();
+
   const links = (
     <>
       <li>
@@ -9,6 +14,24 @@ const NavBar = () => {
       </li>
     </>
   );
+
+  const handleSingOut = () => {
+    signOutUser()
+      .then(() => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "User's Successfully SingOut!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error.code);
+      });
+  };
+
   return (
     <div className="navbar max-w-7xl mx-auto">
       <div className="navbar-start">
@@ -44,10 +67,21 @@ const NavBar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end">
-        <NavLink to="/register" className="btn">
-          Register
-        </NavLink>
+      <div className="navbar-end gap-2">
+        {user ? (
+          <button onClick={handleSingOut} className="btn">
+            Sign Out
+          </button>
+        ) : (
+          <>
+            <NavLink to="/register" className="btn">
+              Register
+            </NavLink>
+            <NavLink to="/signIn" className="btn">
+              Sign In
+            </NavLink>
+          </>
+        )}
       </div>
     </div>
   );
