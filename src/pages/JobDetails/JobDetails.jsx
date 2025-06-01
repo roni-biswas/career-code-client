@@ -5,7 +5,7 @@ import {
   FaEnvelope,
   FaUserTie,
 } from "react-icons/fa";
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 
 const JobDetails = () => {
   const {
@@ -22,7 +22,7 @@ const JobDetails = () => {
     hr_email,
     hr_name,
     company_logo,
-  } = useLoaderData() || {};
+  } = useLoaderData();
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
@@ -91,7 +91,9 @@ const JobDetails = () => {
         </div>
 
         <div className="pt-4">
-          <button className="btn btn-primary w-full">Apply Now</button>
+          <Link to={`/jobApply/${_id}`} className="btn btn-primary w-full">
+            Apply Now
+          </Link>
         </div>
       </div>
     </div>

@@ -5,6 +5,8 @@ import Register from "../pages/Register/Register";
 import SignIn from "../pages/SignIn/SignIn";
 import JobDetails from "../pages/JobDetails/JobDetails";
 import Loading from "../pages/Shared/Loading";
+import PrivetRoute from "./PrivetRoute";
+import JobApply from "../pages/JobApply/JobApply";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
           fetch(`http://localhost:3000/jobDetails/${params.id}`),
         Component: JobDetails,
         hydrateFallbackElement: <Loading />,
+      },
+      {
+        path: "jobApply/:id",
+        element: (
+          <PrivetRoute>
+            <JobApply />
+          </PrivetRoute>
+        ),
       },
     ],
   },
