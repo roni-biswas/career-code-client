@@ -1,8 +1,10 @@
 import React from "react";
 import { MdOutlineLocationOn } from "react-icons/md";
+import { Link } from "react-router";
 
 const JobsCard = ({ job }) => {
   const {
+    _id,
     title,
     location,
     salaryRange,
@@ -42,7 +44,9 @@ const JobsCard = ({ job }) => {
           ))}
         </div>
         <div className="card-actions justify-end">
-          <button className="btn btn-primary mt-6">View Details</button>
+          <Link to={`/jobDetails/${_id}`} className="btn btn-primary mt-6">
+            View Details
+          </Link>
         </div>
       </div>
     </div>
