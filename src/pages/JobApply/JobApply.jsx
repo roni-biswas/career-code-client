@@ -36,7 +36,7 @@ const JobApply = () => {
             timer: 1500,
           });
           form.reset();
-          navigate(`/jobDetails/${jobId}`);
+          navigate(`/myApplications`);
         }
       })
       .catch((error) => {
