@@ -9,6 +9,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+import axios from "axios";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -18,8 +19,20 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setLoading(false);
       setUser(currentUser);
+      setLoading(false);
+      if (currentUser?.email) {
+        const userData = { email: currentUser.email };
+        axios
+          .post("http://localhost:3000/jwt", userData)
+          .then((res) => {
+            const token = res.data.token;
+            console.log("Token after jwt", token);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     });
     return () => unSubscribe();
   }, []);
