@@ -24,14 +24,14 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         const userData = { email: currentUser.email };
         axios
-          .post("http://localhost:3000/jwt", userData)
-          .then((res) => {
-            const token = res.data.token;
-            console.log("Token after jwt", token);
+          .post("http://localhost:3000/jwt", userData, {
+            withCredentials: true,
           })
-          .catch((error) => {
-            console.log(error);
-          });
+          .then((res) => {
+            const token = res.data;
+            console.log("token after jwt", token);
+          })
+          .catch((error) => console.log(error));
       }
     });
     return () => unSubscribe();

@@ -13,7 +13,7 @@ const SignIn = () => {
   const from = location.state || "/";
 
   if (user) {
-    return navigate("/");
+    return navigate(from || "/");
   }
 
   const handleSignIn = (e) => {
